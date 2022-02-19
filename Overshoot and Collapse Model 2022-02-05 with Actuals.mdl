@@ -1,0 +1,701 @@
+{UTF-8}
+effect of human resources on life span = WITH LOOKUP (
+	Human Resources/INITIAL HUMAN RESOURCES,
+		([(0,0)-(2,2)],(0,0.044),(0.2,0.107),(0.4,0.227),(0.6,0.421),(0.8,0.687),(1,1),(1.2\
+		,1.313),(1.4,1.579),(1.6,1.773),(1.8,1.893),(2,1.956) ))
+	~	dmnl
+	~		|
+
+effect of infrastructure on joining rate = WITH LOOKUP (
+	Infrastructure/INITIAL INFRASTRUCTURE,
+		([(0,0)-(2,2)],(0,0),(0.2,0.002),(0.4,0.017),(0.6,0.113),(0.8,0.428),(1,1),(1.2,1.572\
+		),(1.4,1.887),(1.6,1.983),(1.8,1.998),(2,2) ))
+	~	dmnl
+	~		|
+
+effect of infrastructure on life span = WITH LOOKUP (
+	Infrastructure/INITIAL INFRASTRUCTURE,
+		([(0,0)-(2,2)],(0,0),(0.2,0),(0.4,0.002),(0.6,0.037),(0.8,0.297),(1,1),(1.2,1.703),\
+		(1.4,1.963),(1.6,1.998),(1.8,2),(2,2) ))
+	~	dmnl
+	~		|
+
+effect of resources life span=
+	Resources/INITIAL RESOURCES
+	~	dmnl
+	~		|
+
+effect of resources on joining rate=
+	Resources/INITIAL RESOURCES
+	~	dmnl
+	~		|
+
+impact of resources on life span=
+	NORMAL IMPACT OF RESOURCES ON LIFE SPAN MULTIPLIER*effect of resources life span
+	~	dmnl
+	~		|
+
+effect of financial resources on joining rate= WITH LOOKUP (
+	Financial Resources/INITIAL FINANCIAL RESOURCES,
+		([(0,0)-(2,2)],(0,0.024),(0.2,0.071),(0.4,0.176),(0.6,0.367),(0.8,0.652),(1,1),(1.2\
+		,1.348),(1.4,1.633),(1.6,1.824),(1.8,1.929),(2,1.976) ))
+	~	dmnl
+	~		|
+
+impact of financial resources on joining rate=
+	NORMAL IMPACT OF FINANCIAL RESOURCES ON JOINING RATE MULTIPLIER*effect of financial resources on joining rate
+	~	dmnl
+	~		|
+
+impact of financial resources on life span=
+	NORMAL IMPACT OF FINANCIAL RESOURCES ON LIFE SPAN MULTIPLIER*effect of financial resources on life span
+	~	dmnl
+	~		|
+
+impact of human resources on joining rate=
+	NORMAL IMPACT OF HUMAN RESOURCES ON JOINING RATE MULTIPLIER*effect of human resources on joining rate
+	~	dmnl
+	~		|
+
+impact of human resources on life span=
+	NORMAL IMPACT OF HUMAN RESOURCES ON LIFE SPAN MULTIPLIER*effect of human resources on life span
+	~	dmnl
+	~		|
+
+impact of infrastructure on joining rate=
+	NORMAL IMPACT OF INFRASTRUCTURE ON JOINING RATE MULTIPLIER*effect of infrastructure on joining rate
+	~	dmnl
+	~		|
+
+impact of infrastructure on life span=
+	NORMAL IMPACT OF INFRASTRUCTURE ON LIFE SPAN MULTIPLIER*effect of infrastructure on life span
+	~	dmnl
+	~		|
+
+impact of resources on joining rate=
+	NORMAL IMPACT OF RESOURCES ON JOINING RATE MULTIPLIER*effect of resources on joining rate
+	~	dmnl
+	~		|
+
+effect of financial resources on life span = WITH LOOKUP (
+	Financial Resources/INITIAL FINANCIAL RESOURCES,
+		([(0,0)-(2,2)],(0,0.286),(0.2,0.393),(0.4,0.522),(0.6,0.669),(0.8,0.831),(1,1),(1.2\
+		,1.169),(1.4,1.331),(1.6,1.478),(1.8,1.607),(2,1.714) ))
+	~	dmnl
+	~		|
+
+effect of human resources on joining rate = WITH LOOKUP (
+	Human Resources/INITIAL HUMAN RESOURCES,
+		([(0,0)-(2,2)],(0,0.085),(0.2,0.169),(0.4,0.302),(0.6,0.491),(0.8,0.731),(1,1),(1.2\
+		,1.269),(1.4,1.509),(1.6,1.698),(1.8,1.831),(2,1.915) ))
+	~	dmnl
+	~		|
+
+CONSUMPTION RATE OF RESOURCES=
+	10
+	~	people/(Year*SMEs)
+	~		|
+
+ADDITIONS TO RESOURCES PER YEAR AFTER 2021=
+	53.14
+	~	people/Year
+	~		|
+
+additions to resources=
+	additions to resources per year
+	~	people/Year
+	~		|
+
+additions to resources per year=
+	IF THEN ELSE(Time<=(2006-1993), ADDITIONS TO RESOURCES PER YEAR BEFORE 2006 , IF THEN ELSE\
+		( Time<=(2018-1993) , ADDITIONS TO RESOURCES PER YEAR BEFORE 2018 , IF THEN ELSE(Time\
+		<=(2021-1993), ADDITIONS TO RESOURCES PER YEAR BEFORE 2021 ,ADDITIONS TO RESOURCES PER YEAR AFTER 2021\
+		 ) ))
+	~	people/Year
+	~		|
+
+ADDITIONS TO RESOURCES PER YEAR BEFORE 2018=
+	784.52
+	~	people/Year
+	~		|
+
+ADDITIONS TO RESOURCES PER YEAR BEFORE 2006=
+	32.01
+	~	people/Year
+	~		|
+
+ADDITIONS TO RESOURCES PER YEAR BEFORE 2021=
+	135.58
+	~	people/Year
+	~		|
+
+NORMAL IMPACT OF RESOURCES ON LIFE SPAN MULTIPLIER=
+	8.325
+	~	dmnl
+	~		|
+
+NORMAL IMPACT OF RESOURCES ON JOINING RATE MULTIPLIER=
+	0.928
+	~	dmnl
+	~		|
+
+consumption of resources=
+	(Resources/INITIAL RESOURCES)*SMEs in Cluster*CONSUMPTION RATE OF RESOURCES
+	~	people/Year
+	~		|
+
+Resources= INTEG (
+	additions to resources-consumption of resources,
+		INITIAL RESOURCES)
+	~	people
+	~		|
+
+INITIAL RESOURCES=
+	484
+	~	people
+	~		|
+
+ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2021=
+	0
+	~	people/Year
+	~		|
+
+ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2006=
+	1.00012e+006
+	~	money/Year
+	~		|
+
+additions to financial resources per year=
+	IF THEN ELSE(Time<=(2006-1993), ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2006\
+		 , IF THEN ELSE( Time<=(2018-1993) , ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2018\
+		 , IF THEN ELSE(Time<=(2021-1993), ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2021\
+		 ,ADDITIONS TO FINANCIAL RESOURCES PER YEAR AFTER 2021 ) ))
+	~	money/Year
+	~		|
+
+ADDITIONS TO FINANCIAL RESOURCES PER YEAR AFTER 2021=
+	2.91016e+006
+	~	money/Year
+	~		|
+
+ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2006=
+	172
+	~	people/Year
+	~		|
+
+ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2018=
+	100063
+	~	money/Year
+	~		|
+
+ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2021=
+	99860
+	~	money/Year
+	~		|
+
+ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2006=
+	0.01
+	~	Buildings/Year
+	~		|
+
+additions to human resources per year=
+	IF THEN ELSE(Time<=(2006-1993), ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2006 , \
+		IF THEN ELSE( Time<=(2018-1993) , ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2018\
+		 , IF THEN ELSE(Time<=(2021-1993), ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2021\
+		 ,ADDITIONS TO HUMAN RESOURCES PER YEAR AFTER 2021 ) ))
+	~	people/Year
+	~		|
+
+ADDITIONS TO HUMAN RESOURCES PER YEAR AFTER 2021=
+	333
+	~	people/Year
+	~		|
+
+ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2018=
+	1685
+	~	people/Year
+	~		|
+
+ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2021=
+	1.64
+	~	Buildings/Year
+	~		|
+
+additions to infrastructure per year=
+	IF THEN ELSE(Time<=(2006-1993), ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2006 , IF THEN ELSE\
+		( Time<=(2018-1993) , ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2018 , IF THEN ELSE\
+		(Time<=(2021-1993), ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2021 ,ADDITIONS TO INFRASTRUCTURE PER YEAR AFTER 2021\
+		 ) ))
+	~	Buildings/Year
+	~		|
+
+ADDITIONS TO INFRASTRUCTURE PER YEAR AFTER 2021=
+	0.43
+	~	Buildings/Year
+	~		|
+
+ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2018=
+	0
+	~	Buildings/Year
+	~		|
+
+Actual
+	~	
+	~		|
+
+additions to financial resources=
+	additions to financial resources per year
+	~	money/Year
+	~		|
+
+additions to human resources=
+	additions to human resources per year
+	~	people/Year
+	~		|
+
+additions to infrastructure=
+	additions to infrastructure per year
+	~	Buildings/Year
+	~		|
+
+consumption of financial resources=
+	(Financial Resources/INITIAL FINANCIAL RESOURCES)*SMEs in Cluster*CONSUMPTION RATE OF FINANCIAL RESOURCES
+	~	money/Year
+	~		|
+
+consumption of human resources=
+	(Human Resources/INITIAL HUMAN RESOURCES)*SMEs in Cluster*CONSUMPTION RATE OF HUMAN RESOURCES
+	~	people/Year
+	~		|
+
+consumption of infrastructure=
+	(Infrastructure/INITIAL INFRASTRUCTURE)*SMEs in Cluster*CONSUMPTION RATE OF INFRASTRUCTURE
+	~	Buildings/Year
+	~		|
+
+CONSUMPTION RATE OF FINANCIAL RESOURCES=
+	10533
+	~	money/SMEs/Year
+	~		|
+
+CONSUMPTION RATE OF HUMAN RESOURCES=
+	24
+	~	people/(Year*SMEs)
+	~		|
+
+CONSUMPTION RATE OF INFRASTRUCTURE=
+	0.003
+	~	Buildings/(Year*SMEs)
+	~		|
+
+Financial Resources= INTEG (
+	additions to financial resources-consumption of financial resources,
+		INITIAL FINANCIAL RESOURCES)
+	~	money
+	~		|
+
+NORMAL IMPACT OF INFRASTRUCTURE ON JOINING RATE MULTIPLIER=
+	0.716
+	~	dmnl
+	~		|
+
+Human Resources= INTEG (
+	additions to human resources-consumption of human resources,
+		INITIAL HUMAN RESOURCES)
+	~	people
+	~		|
+
+Infrastructure= INTEG (
+	additions to infrastructure-consumption of infrastructure,
+		INITIAL INFRASTRUCTURE)
+	~	Buildings
+	~		|
+
+INITIAL FINANCIAL RESOURCES=
+	1e+007
+	~	money
+	~		|
+
+INITIAL HUMAN RESOURCES=
+	498
+	~	people
+	~		|
+
+INITIAL INFRASTRUCTURE=
+	8
+	~	Buildings
+	~		|
+
+NORMAL IMPACT OF FINANCIAL RESOURCES ON LIFE SPAN MULTIPLIER=
+	1.851
+	~	dmnl
+	~		|
+
+NORMAL IMPACT OF HUMAN RESOURCES ON JOINING RATE MULTIPLIER=
+	0.51
+	~	dmnl
+	~		|
+
+joining rate=
+	NORMAL JOINING RATE*impact of financial resources on joining rate*impact of infrastructure on joining rate\
+		*impact of human resources on joining rate
+	~	SMEs/SMEs/Year
+	~		|
+
+NORMAL IMPACT OF FINANCIAL RESOURCES ON JOINING RATE MULTIPLIER=
+	0.851
+	~	dmnl
+	~		|
+
+NORMAL IMPACT OF INFRASTRUCTURE ON LIFE SPAN MULTIPLIER=
+	1.17
+	~	dmnl
+	~		|
+
+SME life span=
+	NORMAL SME LIFE SPAN*impact of financial resources on life span*impact of infrastructure on life span\
+		*impact of human resources on life span
+	~	Year
+	~		|
+
+NORMAL IMPACT OF HUMAN RESOURCES ON LIFE SPAN MULTIPLIER=
+	1.24
+	~	dmnl
+	~		|
+
+leaving=
+	SMEs in Cluster/SME life span
+	~	SMEs/Year
+	~		|
+
+INITIAL SMES IN CLUSTER=
+	1
+	~	SMEs
+	~		|
+
+joining=
+	SMEs in Cluster*joining rate
+	~	SMEs/Year
+	~		|
+
+NORMAL JOINING RATE=
+	0.5
+	~	SMEs/SMEs/Year
+	~		|
+
+NORMAL SME LIFE SPAN=
+	12.61
+	~	Year
+	~		|
+
+SMEs in Cluster= INTEG (
+	joining-leaving,
+		INITIAL SMES IN CLUSTER)
+	~	SMEs
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 37
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Cluster
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,SMEs in Cluster,586,198,49,29,3,131,0,0,0,0,0,0
+12,2,48,366,202,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(498,202)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(411,202)|
+11,5,48,453,202,6,8,34,3,0,0,1,0,0,0
+10,6,joining,453,221,22,11,40,3,0,0,-1,0,0,0
+12,7,48,795,202,10,8,0,3,0,0,-1,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(748,202)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(667,202)|
+11,10,48,706,202,6,8,34,3,0,0,1,0,0,0
+10,11,leaving,706,229,38,19,40,3,0,0,-1,0,0,0
+10,12,NORMAL SME LIFE SPAN,761,130,55,19,8,3,0,0,0,0,0,0
+10,13,INITIAL SMES IN CLUSTER,421,93,65,19,8,3,0,0,0,0,0,0
+10,14,NORMAL JOINING RATE,305,148,56,19,8,3,0,0,0,0,0,0
+10,15,SME life span,921,209,45,11,8,3,0,0,0,0,0,0
+10,16,joining rate,270,234,35,11,8,3,0,0,0,0,0,0
+1,17,14,16,1,0,0,0,0,64,0,-1--1--1,,1|(268,185)|
+1,18,12,15,1,0,0,0,0,64,0,-1--1--1,,1|(855,137)|
+1,19,16,6,1,0,0,0,0,64,0,-1--1--1,,1|(324,266)|
+1,20,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(551,248)|
+1,21,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(615,255)|
+1,22,15,11,1,0,0,0,0,64,0,-1--1--1,,1|(867,249)|
+1,23,13,1,0,0,0,0,0,64,1,-1--1--1,,1|(489,136)|
+10,24,impact of financial resources on joining rate,94,161,82,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,25,impact of financial resources on life span,1042,134,73,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,26,24,16,1,0,0,0,0,64,0,-1--1--1,,1|(117,220)|
+1,27,25,15,1,0,0,0,0,64,0,-1--1--1,,1|(1030,177)|
+10,28,impact of infrastructure on joining rate,94,323,93,29,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,29,impact of infrastructure on life span,1073,308,85,26,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,30,28,16,1,0,0,0,0,64,0,-1--1--1,,1|(187,329)|
+1,31,29,15,1,0,0,0,0,64,0,-1--1--1,,1|(958,299)|
+10,32,impact of human resources on joining rate,205,413,82,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,33,impact of human resources on life span,859,399,73,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,34,32,16,1,0,0,0,0,64,0,-1--1--1,,1|(280,357)|
+1,35,33,15,1,0,0,0,0,64,0,-1--1--1,,1|(859,329)|
+10,36,Actual,580,309,22,11,8,3,0,0,0,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Financial Resources
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Financial Resources,792,282,58,37,3,131,0,0,0,0,0,0
+12,2,48,516,285,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(685,285)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(575,285)|
+11,5,48,630,285,6,8,34,3,0,0,1,0,0,0
+10,6,additions to financial resources,630,312,65,19,40,3,0,0,-1,0,0,0
+12,7,48,1023,279,10,8,0,3,0,0,-1,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(975,279)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(887,279)|
+11,10,48,931,279,6,8,34,3,0,0,1,0,0,0
+10,11,consumption of financial resources,931,306,58,19,40,3,0,0,-1,0,0,0
+10,12,INITIAL FINANCIAL RESOURCES,758,97,90,30,8,131,0,0,0,0,0,0
+10,13,additions to financial resources per year,458,439,112,31,8,131,0,0,0,0,0,0
+10,14,CONSUMPTION RATE OF FINANCIAL RESOURCES,1154,389,112,27,8,131,0,0,0,0,0,0
+10,15,NORMAL IMPACT OF FINANCIAL RESOURCES ON LIFE SPAN MULTIPLIER,1230,204,134,34,8,131,0,0,0,0,0,0
+10,16,NORMAL IMPACT OF FINANCIAL RESOURCES ON JOINING RATE MULTIPLIER,163,176,141,34,8,131,0,0,0,0,0,0
+10,17,SMEs in Cluster,856,465,33,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,18,impact of financial resources on joining rate,454,83,78,19,8,3,0,0,0,0,0,0
+10,19,impact of financial resources on life span,1057,77,69,19,8,3,0,0,0,0,0,0
+1,20,13,6,1,0,0,0,0,64,0,-1--1--1,,1|(573,397)|
+1,21,14,11,1,0,0,0,0,64,0,-1--1--1,,1|(1002,388)|
+1,22,17,11,1,0,0,0,0,64,0,-1--1--1,,1|(892,417)|
+1,23,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(828,333)|
+1,24,12,1,1,0,0,0,0,64,1,-1--1--1,,1|(777,268)|
+1,25,12,11,1,0,0,0,0,64,0,-1--1--1,,1|(816,200)|
+1,26,15,19,1,0,0,0,0,64,0,-1--1--1,,1|(1130,169)|
+1,27,16,18,1,0,0,0,0,64,0,-1--1--1,,1|(281,189)|
+10,28,ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2006,238,362,94,28,8,131,0,0,0,0,0,0
+10,29,ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2018,242,466,94,28,8,131,0,0,0,0,0,0
+10,30,ADDITIONS TO FINANCIAL RESOURCES PER YEAR BEFORE 2021,371,559,94,28,8,131,0,0,0,0,0,0
+10,31,ADDITIONS TO FINANCIAL RESOURCES PER YEAR AFTER 2021,611,569,94,28,8,131,0,0,0,0,0,0
+10,32,Time,684,459,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,33,28,13,1,0,0,0,0,64,0,-1--1--1,,1|(327,405)|
+1,34,29,13,1,0,0,0,0,64,0,-1--1--1,,1|(349,486)|
+1,35,30,13,1,0,0,0,0,64,0,-1--1--1,,1|(447,525)|
+1,36,31,13,1,0,0,0,0,64,0,-1--1--1,,1|(546,503)|
+1,37,32,13,1,0,0,0,0,64,0,-1--1--1,,1|(611,457)|
+10,38,effect of financial resources on joining rate,586,189,78,19,8,3,0,0,0,0,0,0
+1,39,1,38,1,0,0,0,0,64,0,-1--1--1,,1|(672,251)|
+1,40,12,38,1,0,0,0,0,64,0,-1--1--1,,1|(669,104)|
+1,41,38,18,1,0,0,0,0,64,0,-1--1--1,,1|(485,151)|
+10,42,effect of financial resources on life span,941,170,69,19,8,3,0,0,0,0,0,0
+1,43,1,42,1,0,0,0,0,64,0,-1--1--1,,1|(905,240)|
+1,44,12,42,1,0,0,0,0,64,0,-1--1--1,,1|(842,104)|
+1,45,42,19,1,0,0,0,0,64,0,-1--1--1,,1|(1017,148)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Infrastructure
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Infrastructure,792,282,58,37,3,131,0,0,0,0,0,0
+12,2,48,516,285,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(685,285)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(575,285)|
+11,5,48,630,285,6,8,34,3,0,0,1,0,0,0
+10,6,additions to infrastructure,630,312,65,19,40,3,0,0,-1,0,0,0
+12,7,48,1023,279,10,8,0,3,0,0,-1,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(975,279)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(887,279)|
+11,10,48,931,279,6,8,34,3,0,0,1,0,0,0
+10,11,consumption of infrastructure,931,306,65,19,40,3,0,0,-1,0,0,0
+10,12,INITIAL INFRASTRUCTURE,778,100,74,31,8,131,0,0,0,0,0,0
+10,13,additions to infrastructure per year,454,440,94,28,8,131,0,0,0,0,0,0
+10,14,CONSUMPTION RATE OF INFRASTRUCTURE,1154,389,84,28,8,131,0,0,0,0,0,0
+10,15,NORMAL IMPACT OF INFRASTRUCTURE ON LIFE SPAN MULTIPLIER,1230,204,109,28,8,131,0,0,0,0,0,0
+10,16,NORMAL IMPACT OF INFRASTRUCTURE ON JOINING RATE MULTIPLIER,166,176,111,28,8,131,0,0,0,0,0,0
+10,17,SMEs in Cluster,856,465,33,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,18,impact of infrastructure on joining rate,468,136,78,28,8,3,0,0,0,0,0,0
+10,19,impact of infrastructure on life span,1053,115,75,19,8,3,0,0,0,0,0,0
+1,20,13,6,1,0,0,0,0,64,0,-1--1--1,,1|(572,399)|
+1,21,14,11,1,0,0,0,0,64,0,-1--1--1,,1|(1002,388)|
+1,22,17,11,1,0,0,0,0,64,0,-1--1--1,,1|(892,417)|
+1,23,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(828,333)|
+1,24,12,1,1,0,0,0,0,64,1,-1--1--1,,1|(777,268)|
+1,25,12,11,1,0,0,0,0,64,0,-1--1--1,,1|(824,197)|
+1,26,15,19,1,0,0,0,0,64,0,-1--1--1,,1|(1134,185)|
+1,27,16,18,1,0,0,0,0,64,0,-1--1--1,,1|(280,209)|
+10,28,ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2006,246,369,89,28,8,131,0,0,0,0,0,0
+10,29,ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2018,254,519,89,28,8,131,0,0,0,0,0,0
+10,30,ADDITIONS TO INFRASTRUCTURE PER YEAR BEFORE 2021,433,587,89,28,8,131,0,0,0,0,0,0
+10,31,ADDITIONS TO INFRASTRUCTURE PER YEAR AFTER 2021,631,609,89,28,8,131,0,0,0,0,0,0
+10,32,Time,655,486,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,33,28,13,1,0,0,0,0,64,0,-1--1--1,,1|(289,431)|
+1,34,29,13,1,0,0,0,0,64,0,-1--1--1,,1|(349,510)|
+1,35,30,13,1,0,0,0,0,64,0,-1--1--1,,1|(463,540)|
+1,36,31,13,1,0,0,0,0,64,0,-1--1--1,,1|(577,544)|
+1,37,32,13,1,0,0,0,0,64,0,-1--1--1,,1|(595,472)|
+10,38,effect of infrastructure on joining rate,618,184,69,19,8,3,0,0,0,0,0,0
+10,39,effect of infrastructure on life span,940,177,69,19,8,3,0,0,0,0,0,0
+1,40,1,38,1,0,0,0,0,64,0,-1--1--1,,1|(685,252)|
+1,41,12,38,1,0,0,0,0,64,0,-1--1--1,,1|(676,108)|
+1,42,38,18,1,0,0,0,0,64,0,-1--1--1,,1|(540,204)|
+1,43,1,39,1,0,0,0,0,64,0,-1--1--1,,1|(909,229)|
+1,44,12,39,1,0,0,0,0,64,0,-1--1--1,,1|(881,127)|
+1,45,39,19,1,0,0,0,0,64,0,-1--1--1,,1|(1009,182)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Human Resources
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Human Resources,788,300,54,38,3,131,0,0,0,0,0,0
+12,2,48,516,302,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(685,302)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(575,302)|
+11,5,48,630,302,6,8,34,3,0,0,1,0,0,0
+10,6,additions to human resources,630,329,65,19,40,3,0,0,-1,0,0,0
+12,7,48,1023,296,10,8,0,3,0,0,-1,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(975,296)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(883,296)|
+11,10,48,931,296,6,8,34,3,0,0,1,0,0,0
+10,11,consumption of human resources,931,323,65,19,40,3,0,0,-1,0,0,0
+10,12,INITIAL HUMAN RESOURCES,758,114,54,28,8,131,0,0,0,0,0,0
+10,13,additions to human resources per year,460,456,94,28,8,131,0,0,0,0,0,0
+10,14,CONSUMPTION RATE OF HUMAN RESOURCES,1154,406,84,28,8,131,0,0,0,0,0,0
+10,15,NORMAL IMPACT OF HUMAN RESOURCES ON LIFE SPAN MULTIPLIER,1235,220,109,28,8,131,0,0,0,0,0,0
+10,16,NORMAL IMPACT OF HUMAN RESOURCES ON JOINING RATE MULTIPLIER,163,193,111,28,8,131,0,0,0,0,0,0
+10,17,SMEs in Cluster,856,482,33,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,18,impact of human resources on joining rate,459,98,78,28,8,3,0,0,0,0,0,0
+10,19,impact of human resources on life span,1049,94,75,19,8,3,0,0,0,0,0,0
+1,20,13,6,1,0,0,0,0,64,0,-1--1--1,,1|(574,414)|
+1,21,14,11,1,0,0,0,0,64,0,-1--1--1,,1|(1002,405)|
+1,22,17,11,1,0,0,0,0,64,0,-1--1--1,,1|(892,434)|
+1,23,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(828,350)|
+1,24,12,1,1,0,0,0,0,64,1,-1--1--1,,1|(777,285)|
+1,25,12,11,1,0,0,0,0,64,0,-1--1--1,,1|(832,223)|
+1,26,15,19,1,0,0,0,0,64,0,-1--1--1,,1|(1128,189)|
+1,27,16,18,1,0,0,0,0,64,0,-1--1--1,,1|(284,206)|
+10,28,ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2006,232,397,96,40,8,131,0,0,0,0,0,0
+10,29,ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2018,239,507,100,37,8,131,0,0,0,0,0,0
+10,30,ADDITIONS TO HUMAN RESOURCES PER YEAR BEFORE 2021,368,609,95,40,8,131,0,0,0,0,0,0
+10,31,ADDITIONS TO HUMAN RESOURCES PER YEAR AFTER 2021,572,628,101,35,8,131,0,0,0,0,0,0
+1,32,28,13,1,0,0,0,0,64,0,-1--1--1,,1|(289,432)|
+1,33,29,13,1,0,0,0,0,64,0,-1--1--1,,1|(355,533)|
+1,34,30,13,1,0,0,0,0,64,0,-1--1--1,,1|(474,543)|
+1,35,31,13,1,0,0,0,0,64,0,-1--1--1,,1|(568,572)|
+10,36,Time,679,501,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,37,36,13,1,0,0,0,0,64,0,-1--1--1,,1|(623,498)|
+10,38,effect of human resources on joining rate,606,202,78,19,8,3,0,0,0,0,0,0
+10,39,effect of human resources on life span,941,198,69,19,8,3,0,0,0,0,0,0
+1,40,12,38,1,0,0,0,0,64,0,-1--1--1,,1|(696,137)|
+1,41,1,38,1,0,0,0,0,64,0,-1--1--1,,1|(666,275)|
+1,42,38,18,1,0,0,0,0,64,0,-1--1--1,,1|(509,192)|
+1,43,12,39,1,0,0,0,0,64,0,-1--1--1,,1|(882,139)|
+1,44,1,39,1,0,0,0,0,64,0,-1--1--1,,1|(886,273)|
+1,45,39,19,1,0,0,0,0,64,0,-1--1--1,,1|(1000,175)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 5
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Resources,788,283,54,38,3,131,0,0,0,0,0,0
+12,2,48,516,285,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(685,285)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(575,285)|
+11,5,48,630,285,6,8,34,3,0,0,1,0,0,0
+10,6,additions to resources,630,312,60,19,40,3,0,0,-1,0,0,0
+12,7,48,1023,279,10,8,0,3,0,0,-1,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(975,279)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(883,279)|
+11,10,48,931,279,6,8,34,3,0,0,1,0,0,0
+10,11,consumption of resources,931,306,60,19,40,3,0,0,-1,0,0,0
+10,12,INITIAL RESOURCES,758,97,63,19,8,131,0,0,0,0,0,0
+10,13,additions to resources per year,460,439,66,19,8,131,0,0,0,0,0,0
+10,14,CONSUMPTION RATE OF RESOURCES,1154,389,84,28,8,131,0,0,0,0,0,0
+10,15,NORMAL IMPACT OF RESOURCES ON LIFE SPAN MULTIPLIER,1235,203,96,28,8,131,0,0,0,0,0,0
+10,16,NORMAL IMPACT OF RESOURCES ON JOINING RATE MULTIPLIER,163,176,111,28,8,131,0,0,0,0,0,0
+10,17,SMEs in Cluster,856,465,33,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,18,impact of resources on joining rate,474,96,78,28,8,3,0,0,0,0,0,0
+10,19,impact of resources on life span,1039,79,75,19,8,3,0,0,0,0,0,0
+1,20,13,6,1,0,0,0,0,64,0,-1--1--1,,1|(574,397)|
+1,21,14,11,1,0,0,0,0,64,0,-1--1--1,,1|(1002,388)|
+1,22,17,11,1,0,0,0,0,64,0,-1--1--1,,1|(892,417)|
+1,23,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(828,333)|
+1,24,12,1,1,0,0,0,0,64,1,-1--1--1,,1|(777,268)|
+1,25,12,11,1,0,0,0,0,64,0,-1--1--1,,1|(807,206)|
+1,26,15,19,1,0,0,0,0,64,0,-1--1--1,,1|(1123,175)|
+1,27,16,18,1,0,0,0,0,64,0,-1--1--1,,1|(287,199)|
+10,28,ADDITIONS TO RESOURCES PER YEAR BEFORE 2006,232,380,91,28,8,131,0,0,0,0,0,0
+10,29,ADDITIONS TO RESOURCES PER YEAR BEFORE 2018,239,490,91,28,8,131,0,0,0,0,0,0
+10,30,ADDITIONS TO RESOURCES PER YEAR BEFORE 2021,368,592,91,28,8,131,0,0,0,0,0,0
+10,31,ADDITIONS TO RESOURCES PER YEAR AFTER 2021,572,611,91,28,8,131,0,0,0,0,0,0
+1,32,28,13,1,0,0,0,0,64,0,-1--1--1,,1|(289,415)|
+1,33,29,13,1,0,0,0,0,64,0,-1--1--1,,1|(355,516)|
+1,34,30,13,1,0,0,0,0,64,0,-1--1--1,,1|(474,526)|
+1,35,31,13,1,0,0,0,0,64,0,-1--1--1,,1|(568,555)|
+10,36,Time,679,484,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,37,36,13,1,0,0,0,0,64,0,-1--1--1,,1|(623,481)|
+10,38,effect of resources on joining rate,594,193,59,19,8,3,0,0,0,0,0,0
+10,39,effect of resources life span,948,182,59,19,8,3,0,0,0,0,0,0
+1,40,12,38,1,0,0,0,0,64,0,-1--1--1,,1|(657,124)|
+1,41,1,38,1,0,0,0,0,64,0,-1--1--1,,1|(656,264)|
+1,42,12,39,1,0,0,0,0,64,0,-1--1--1,,1|(847,105)|
+1,43,1,39,1,0,0,0,0,64,0,-1--1--1,,1|(887,252)|
+1,44,38,18,1,0,0,0,0,64,0,-1--1--1,,1|(524,165)|
+1,45,39,19,1,0,0,0,0,64,0,-1--1--1,,1|(1007,146)|
+///---\\\
+:GRAPH Calibration
+:TITLE Model Calbration
+:X-DIV 4
+:Y-DIV 5
+:X-MIN 0
+:X-MAX 28
+:SCALE
+:VAR Actual
+:Y-MAX 125
+:LINE-WIDTH 2
+:VAR SMEs in Cluster
+:Y-MAX 125
+:LINE-WIDTH 2
+:L<%^E!@
+1:Current.vdf
+1:Actual SMEs in Cluster.vdf
+9:Current
+31:1,Actual SMEs in Cluster
+32:29,Actual
+33:(0,0),(1,2),(2,2),(3,2),(4,5),(5,7),(6,9),(7,9),(8,9),(9,12),(10,18),
+33:(11,19),(12,23),(13,24),(14,29),(15,37),(16,68),(17,83),(18,96),(20,96),(21,95),
+33:(22,92),(23,80),(24,80),(25,71),(26,66),(27,40),(27,13),(28,6),
+13:Actual SMEs in Cluster
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:2,
+34:0,
+4:Time
+5:SMEs in Cluster
+35:Date
+36:YYYY
+37:1993
+38:1
+39:1
+40:0
+41:0
+42:0
+24:0
+25:37
+26:37
